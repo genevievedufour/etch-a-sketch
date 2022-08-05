@@ -5,6 +5,7 @@ const root = document.querySelector(':root');
 const gridSizeSlider = document.querySelector("#grid-size-slider");
 const gridSizeLabel= document.querySelector("#grid-size-label");
 const resetButton = document.querySelector("#reset-button");
+const clearButton = document.querySelector('#clear-button');
 const singleColorRadio = document.querySelector('#singleColor');
 const rainbowColorRadio = document.querySelector('#rainbowColor');
 
@@ -73,6 +74,12 @@ function resetGrid(){
     singleColorRadio.checked = true;
 }
 
+function clearGrid(){
+    let gridSize = root.style.getPropertyValue('--gridSize');
+    setGridSize(gridSize);
+}
+
 resetButton.addEventListener('click', resetGrid);
+clearButton.addEventListener('click', clearGrid);
 
 gridSizeSlider.onchange = onSliderChange;
