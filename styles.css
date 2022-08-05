@@ -14,7 +14,7 @@
 .cell{
     background-color: rgb(223, 223, 223);
     border: 1px solid black;
-    aspect-ratio: 1;
+    aspect-ratio: 1;    
 }
 
 .cell-selected{
