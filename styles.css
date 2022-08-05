@@ -1,5 +1,6 @@
 :root{
     --gridSize: 16;
+    --selectedCellColor: rgb(10, 70, 110);
 }
 
 .grid-container{
@@ -17,7 +18,7 @@
 }
 
 .cell-selected{
-    background-color: rgb(70, 70, 70);
+    background-color: var(--selectedCellColor);
 }
 
 #reset-button{

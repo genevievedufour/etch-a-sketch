@@ -1,10 +1,12 @@
-let gridContainer = document.querySelector(".grid-container");
+const gridContainer = document.querySelector(".grid-container");
 
-let root = document.querySelector(':root');
+const root = document.querySelector(':root');
 
-let gridSizeSlider = document.querySelector("#grid-size-slider");
-let gridSizeLabel= document.querySelector("#grid-size-label");
-let resetButton = document.querySelector("#reset-button");
+const gridSizeSlider = document.querySelector("#grid-size-slider");
+const gridSizeLabel= document.querySelector("#grid-size-label");
+const resetButton = document.querySelector("#reset-button");
+const singleColorRadio = document.querySelector('#singleColor');
+const rainbowColorRadio = document.querySelector('#rainbowColor');
 
 resetGrid();
 
@@ -16,14 +18,35 @@ function setGridSize(newGridSize){
     drawGrid(newGridSize);
 }
 
-function onSquareHover(e){    
+function onSquareHover(e){
     if(e.buttons === 4){
         this.classList.remove('cell-selected');
+        this.style.backgroundColor = root.style.getPropertyValue('--selectedCellColor');
     }
     if(e.buttons !== 1)
         return;
 
-    this.classList.add('cell-selected');
+    if(singleColorRadio.checked){
+        this.style.backgroundColor = root.style.getPropertyValue('--selectedCellColor');
+        this.classList.add('cell-selected');
+    }
+    else if(rainbowColorRadio.checked){
+        let color = generateRandomColor();
+        this.style.backgroundColor = color;
+    }
+    
+}
+
+function generateRandomColor(){
+    let r = randomNumberFromIntervalIncluded(0,255);
+    let g = randomNumberFromIntervalIncluded(0,255);
+    let b = randomNumberFromIntervalIncluded(0,255);
+    
+    return "rgb(" + r + "," + g + "," + b + ")";
+}
+
+function randomNumberFromIntervalIncluded(min, max){
+    return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
 function onSliderChange(e){
@@ -47,6 +70,7 @@ function drawGrid(gridSize){
 
 function resetGrid(){
     setGridSize(16);
+    singleColorRadio.checked = true;
 }
 
 resetButton.addEventListener('click', resetGrid);
