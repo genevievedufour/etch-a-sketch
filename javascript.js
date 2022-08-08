@@ -123,4 +123,3 @@ resetEtchASketch();
 colorSelect.addEventListener("input", colorChoosed, false);
 
 gridSizeSlider.onchange = onSliderChange;
-
