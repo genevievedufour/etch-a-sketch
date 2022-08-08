@@ -1,5 +1,7 @@
 const gridContainer = document.querySelector(".grid-container");
 
+const defaultSelectedColor = "rgb(10, 70, 110)";
+
 const root = document.querySelector(':root');
 
 const gridSizeSlider = document.querySelector("#grid-size-slider");
@@ -8,8 +10,7 @@ const resetButton = document.querySelector("#reset-button");
 const clearButton = document.querySelector('#clear-button');
 const singleColorRadio = document.querySelector('#singleColor');
 const rainbowColorRadio = document.querySelector('#rainbowColor');
-
-resetGrid();
+const colorSelect = document.querySelector('#color-select');
 
 function setGridSize(newGridSize){
     gridContainer.innerHTML = "";
@@ -17,6 +18,10 @@ function setGridSize(newGridSize){
     gridSizeSlider.value = newGridSize;
     gridSizeLabel.textContent = newGridSize + " x " + newGridSize;
     drawGrid(newGridSize);
+}
+
+function changeSelectedColorCSS(color){
+    root.style.setProperty('--selectedCellColor', color);
 }
 
 function onSquareHover(e){
@@ -69,9 +74,11 @@ function drawGrid(gridSize){
     
 }
 
-function resetGrid(){
+function resetEtchASketch(){
     setGridSize(16);
     singleColorRadio.checked = true;
+    changeSelectedColorCSS(defaultSelectedColor);
+    colorSelect.value = convertRGBstringTohexadecimal(root.style.getPropertyValue('--selectedCellColor'));
 }
 
 function clearGrid(){
@@ -79,7 +86,41 @@ function clearGrid(){
     setGridSize(gridSize);
 }
 
-resetButton.addEventListener('click', resetGrid);
+function colorChoosed(e){
+    changeSelectedColorCSS(convertHexadecimalToRGBstring(e.target.value));
+}
+
+function convertRGBstringTohexadecimal(rgb){    
+    let cssSplit = rgb.split("(")[1].split(")")[0];
+    cssSplit = cssSplit.split(",");
+
+    let number = cssSplit.map(function(x){
+        x = parseInt(x).toString(16);
+        return (x.length==1) ? "0"+x: x;
+    });
+
+    return "#"+number.join("");
+}
+
+function convertHexadecimalToRGBstring(hexa){
+    let hexSplit = hexa.split("#")[1];
+    hexSplit = hexSplit.match(/.{1,2}/g);
+
+    let number = hexSplit.map(function(x){
+        x = parseInt(x, 16);
+        return x;
+    });
+    
+    return "rgb(" + number[0] + ("," + number[1] + "," + number[2] + ")");
+}
+
+resetButton.addEventListener('click', resetEtchASketch);
 clearButton.addEventListener('click', clearGrid);
 
+changeSelectedColorCSS(defaultSelectedColor);
+resetEtchASketch();
+
+colorSelect.addEventListener("input", colorChoosed, false);
+
 gridSizeSlider.onchange = onSliderChange;
+

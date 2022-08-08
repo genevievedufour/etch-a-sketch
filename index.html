@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <script src="javascript.js" defer></script>
         <link rel="stylesheet" href="styles.css">
+        <script src="javascript.js" defer></script>        
         <meta charset="UTF8">
         <title>Etch-a-Sketch</title>
     </head>
@@ -13,7 +13,10 @@
                 10<input id="grid-size-slider" type="range" min="10" max="64">64
                 <div id="grid-size-label"></div>
             </div>
-            <div>
+            <div>                
+                <div class="color-container">
+                    <input id="color-select" type="color">
+                </div>
                 <div class="select-mode-label">Select your mode</div>
                 <input type="radio" id="singleColor" name="color_mode" value="SingleColor" checked>
                 <label for="singleColor">Single Color</label><br>

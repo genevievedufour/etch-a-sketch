@@ -38,3 +38,26 @@ body{
 .select-mode-label{
     font-weight: 700;
 }
+
+.color-container{
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    gap: 30px;    
+}
+
+#color-select{
+    -webkit-appearance: none; 
+    appearance: none;
+    width: 100px;
+    height: 100px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+#color-select::-webkit-color-swatch {
+    border-radius: 50px;
+    border:none;
+    box-shadow: 2px 2px 2px #888888;
+}
