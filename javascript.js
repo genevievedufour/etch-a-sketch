@@ -27,7 +27,7 @@ function changeSelectedColorCSS(color){
 function onSquareHover(e){
     if(e.buttons === 4){
         this.classList.remove('cell-selected');
-        this.style.backgroundColor = root.style.getPropertyValue('--selectedCellColor');
+        this.style.backgroundColor = root.style.getPropertyValue('--backgroundColor');
     }
     if(e.buttons !== 1)
         return;

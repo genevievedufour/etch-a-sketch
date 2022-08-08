@@ -1,6 +1,7 @@
 :root{
     --gridSize: 16;
     --selectedCellColor: rgb(10, 70, 110);
+    --background-color: rgb(223, 223, 223);
 }
 
 body{
@@ -22,7 +23,7 @@ body{
 }
 
 .cell{
-    background-color: rgb(223, 223, 223);
+    background-color: var(--background-color);
     border: 1px solid black;
     aspect-ratio: 1;
 }
